@@ -134,6 +134,7 @@
                                     </thead>
                                     <tbody id='tb1'></tbody>
                                 </table>
+                                <p id="DCG"></p>
                             </div>
                         </div>
                     </div>
@@ -191,6 +192,12 @@
                 var code = "";
                 var id = 1
                 for(var key in result_map) {
+                    if (key == "DCG") {
+                        var p_dcg = document.getElementById('DCG');
+                        p_dcg.innerText = "DCG : {0}     ".replace("{0}", result_map["DCG"]) +
+                            "NDCG : {0}".replace("{0}", result_map["NDCG"])
+                        continue;
+                    }
                     code += "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>"
                         .replace("{0}", id).replace("{1}", key)
                         .replace("{2}", result_map[key]);
@@ -228,15 +235,6 @@
                 div4.innerHTML = code;
 
                 //pie chart
-//                var data = [
-//                    { label: "Internet Explorer", data: 12},
-//                    { label: "Mobile", data: 27},
-//                    { label: "Safari", data: 85},
-//                    { label: "Opera", data: 64},
-//                    { label: "Firefox", data: 90},
-//                    { label: "Chrome", data: 112}
-//                ];
-
                 if ($("#piechart").length) {
                     $.plot($("#piechart"), data,
                         {

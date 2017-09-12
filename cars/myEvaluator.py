@@ -2,30 +2,17 @@
 
 import csv
 import json
-import math
-from itertools import izip_longest  # zip_longest -> Python 3, izip_longest -> Python 2
-from newEvaluator import *
+from basicEvaluator import *
 
 def keyToIndex(aspect_name):
     keyWord = {"综合": 0, "操控": 1, "动力": 2, "性价比": 3, "油耗": 4, "空间": 5, "舒适性": 6, "外观": 7, "内饰": 8}
     return keyWord[aspect_name]
 def getDCG(rels):
-    print "DCG:"
-    print rels
-    # dcg = rels[0]
-    # i = 2
-    # for rel in rels[1:]:
-    #     dcg = dcg + pow(2, rel) / math.log(i,2)
-    #     i = i + 1
-    #return dcg
     return dcg_at_k(rels, 13)
 
 def getIDCG(rels):
     rels.sort()
     rels.reverse()
-    print "IDCG:"
-    print rels
-    #return getDCG(rels)
     return dcg_at_k(rels, 13)
 
 def getNDCG(rels):
@@ -45,7 +32,7 @@ def getScoreList(result_list, standard_list):
             tmp_list = []
     result_groups.append(tmp_list)
     tmp = json.dumps(result_groups).decode("unicode-escape")
-    print tmp
+    # print tmp
     res = []
     #衡量推荐结果与最优结果之间的差别
     for index1, car in enumerate(result_list):

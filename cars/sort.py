@@ -7,9 +7,7 @@ from numpy import *
 from getInputSentence import *
 import math
 import numpy
-from graphviz import Digraph
-import matplotlib.pyplot as plt
-from evaluator import *
+from myEvaluator import *
 
 RI = [0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45]
 
@@ -36,14 +34,16 @@ def computeConsistence(max_lambda,n):
     CI = (max_lambda-n)/(n-1)
     CR = CI / RI[n-1]
     return CR
+
 def getKey( x ):
     return x[1]
+
 def sort(aspect_percentage):
     keywords = []
     dict = {}
     d = open("dict.txt",'rb')
-    log = open("log.txt", "ab")
-    log1 = open("log1.txt", "ab")
+    # log = open("log.txt", "ab")
+    # log1 = open("log1.txt", "ab")
     count = 0#车型数量
 
     for item in d:
@@ -53,7 +53,6 @@ def sort(aspect_percentage):
         count += 1
     criteria_map = {}
     aspect2Id_map = {"操控":1, "动力":2, "性价比":3, "油耗":4, "空间":5, "舒适性":6, "外观":7, "内饰":8}
-    #aspect_percentage = getPercentage(input_sentence)
     criteria = []
     aspect = []
     if aspect_percentage is None:
@@ -62,7 +61,7 @@ def sort(aspect_percentage):
         value = float(value)
         criteria.append(value)
         criteria_map.__setitem__(key, value)
-        log.write(key + ":%.2f%% " % (value * 100))
+        # log.write(key + ":%.2f%% " % (value * 100))
 
     carType = ['帕萨特', '天籁', '蒙迪欧', '君威', '凯美瑞', '宝马', '雅阁', '凯迪拉克', "迈腾", "奥迪", "君越", "博瑞", "速派"]
     criteria_num = len(criteria_map)
@@ -172,7 +171,6 @@ def sort(aspect_percentage):
     for i in range(len(list)):
         res = list[i][0] + " " + str(list[i][1]) + " "
         system_seq.append(list[i][0])
-        #print(res)
         result_map.__setitem__(list[i][0], round(list[i][1], 3))
         out.append(res)
     result_pair = getStandardList(aspect_percentage, carType)
@@ -181,7 +179,6 @@ def sort(aspect_percentage):
         out1.append(key + ":" + str(value) + ",")
     for key in result_pair:
         tmp = json.dumps(key).decode("unicode-escape")
-        print tmp
         standard_seq.append(key[0])
         out1.append(key[0] + " " +  str(key[1]) + " ")
     system_seq_tmp = json.dumps(system_seq).decode("unicode-escape")
@@ -189,11 +186,14 @@ def sort(aspect_percentage):
     standard_seq_tmp = json.dumps(standard_seq).decode("unicode-escape")
     #print standard_seq_tmp
     input_list = getScoreList(system_seq, standard_seq)
-    log1.writelines(out1)
-    log1.write('\n')
-    log.writelines(out)
-    log.write('\n')
-    #print getNDCG(input_list)
+    # log1.writelines(out1)
+    # log1.write('\n')
+    # log.writelines(out)
+    # log.write('\n')
+    dcg = round(getDCG(input_list), 3)
+    ndcg = round(getNDCG(input_list), 3)
+    result_map["DCG"] = dcg
+    result_map["NDCG"] = ndcg
     return result_map
 def sortByAspect(aspect_percentage, flag):
     if flag == "综合":
