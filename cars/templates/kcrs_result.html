@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        ===
+        This comment should NOT be removed.
+
+        Charisma v2.0.0
+
+        Copyright 2012-2014 Muhammad Usman
+        Licensed under the Apache License v2.0
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        http://usman.it
+        http://twitter.com/halalit_usman
+        ===
+    -->
+    <meta charset="utf-8">
+    <title>KCRS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+    <meta name="author" content="Muhammad Usman">
+
+    <!-- The styles -->
+    <link href="/static/css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="/static/css/charisma-app.css" rel="stylesheet">
+    <link href='/static/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='/static/bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='/static/bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='/static/bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='/static/bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='/static/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='/static/css/jquery.noty.css' rel='stylesheet'>
+    <link href='/static/css/noty_theme_default.css' rel='stylesheet'>
+    <link href='/static/css/elfinder.min.css' rel='stylesheet'>
+    <link href='/static/css/elfinder.theme.css' rel='stylesheet'>
+    <link href='/static/css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='/static/css/uploadify.css' rel='stylesheet'>
+    <link href='/static/css/animate.min.css' rel='stylesheet'>
+
+    <!-- jQuery -->
+    <script src="/static/bower_components/jquery/jquery.min.js"></script>
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <style>
+        .div-inline{ display:inline}
+    </style>
+</head>
+
+<body>
+    <!-- topbar starts -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-inner">
+            <button type="button" class="navbar-toggle pull-left animated flip">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://github.com/ljv006/KCRS"> <img alt="Charisma Logo" src="/static/img/car_logo.png" class="hidden-xs"/>
+                <span>KCRS</span></a>
+        </div>
+    </div>
+    <!-- topbar ends -->
+    <div class="ch-container">
+        <div class="row">
+            <div id="content" class="col-lg-12 col-sm-12">
+                    <!-- content starts -->
+                <div>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="http://127.0.0.1:5000/">Home</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="box col-md-12">
+                        <div class="box-inner">
+                            <div class="box-header well" data-original-title>
+                                <h2>Query Sentence</h2>
+                                <div class="box-icon">
+                                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                            class="glyphicon glyphicon-chevron-up"/></i></a>
+                                </div>
+                            </div>
+                            <div class="box-content">
+                                <div ID="div_query_sentence"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="box col-md-12">
+                        <div class="box-inner">
+                            <div class="box-header well" data-original-title>
+                                <h2>Query Percentages</h2>
+                                <div class="box-icon">
+                                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                            class="glyphicon glyphicon-chevron-up"></i></a>
+                                </div>
+                            </div>
+                            <div class="box-content">
+                                <div ID="div_query_percentage"></div>
+                                <div id="piechart" style="height:300px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="box col-md-6">
+                        <div class="box-inner">
+                            <div class="box-header well" data-original-title>
+                                <h2>Recommendation Result</h2>
+                                <div class="box-icon">
+                                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                            class="glyphicon glyphicon-chevron-up"></i></a>
+                                </div>
+                            </div>
+                            <div class="box-content">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Car name</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id='tb1'></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box col-md-6">
+                        <div class="box-inner">
+                            <div class="box-header well" data-original-title>
+                                <h2>Analyzation</h2>
+                                <div class="box-icon">
+                                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                            class="glyphicon glyphicon-chevron-up"></i></a>
+                                </div>
+                            </div>
+                            <div class="box-content">
+                                <div id = "text_result"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+        <hr>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h3>Settings</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>Here settings can be configured...</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                        <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="row">
+            <p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; <a href="https://github.com/ljv006" target="_blank">Long Jiawei </a>2017</p>
+
+            <p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a
+                    href="http://sdcs.sysu.edu.cn">SYSU</a></p>
+        </footer>
+        <script>
+            String.prototype.replaceAll = function(s1,s2){
+                return this.replace(new RegExp(s1,"gm"),s2);
+            }
+            window.onload=function() {
+                var div1 = document.getElementById('tb1');
+                var resultJson = {{ordered_result|tojson}}
+                var result_map = JSON.parse(resultJson)
+                var code = "";
+                var id = 1
+                for(var key in result_map) {
+                    code += "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>"
+                        .replace("{0}", id).replace("{1}", key)
+                        .replace("{2}", result_map[key]);
+                    id += 1
+                }
+                div1.innerHTML = code;
+
+                var div2 = document.getElementById('div_query_sentence');
+                var query_sent_json = {{query_sent|tojson}}
+                var query_sent_obj = JSON.parse(query_sent_json)
+                code = ""
+                code += "<center> <p style=\"font-size: 36px\">" + query_sent_obj["sentence"].replaceAll("\'", "")
+                    + "</p> </center>"
+                div2.innerHTML = code;
+
+                var div3 = document.getElementById('div_query_percentage');
+                var query_percentage_json = {{query_percent|tojson}}
+                var query_percentage_obj = JSON.parse(query_percentage_json)
+                var percentageStr = ""
+                var data = []
+                for(var key in query_percentage_obj) {
+                    data_obj = {label:key, data:query_percentage_obj[key]}
+                    data.push(data_obj)
+                    percentageStr += "{0} : {1}  ".replace("{0}", key).replace("{1}", query_percentage_obj[key]);
+                }
+                code = ""
+                code += "<p style=\"font-size: 24px\">" +  percentageStr + "</p>"
+                div3.innerHTML = code;
+
+                var div4 = document.getElementById('text_result');
+                var textResultJson = {{text_result|tojson}}
+                var textResultStr = JSON.parse(textResultJson)["text_result"]
+                code = ""
+                code += "<p style=\"font-size: 28px\">" +  textResultStr + "</p>"
+                div4.innerHTML = code;
+
+                //pie chart
+//                var data = [
+//                    { label: "Internet Explorer", data: 12},
+//                    { label: "Mobile", data: 27},
+//                    { label: "Safari", data: 85},
+//                    { label: "Opera", data: 64},
+//                    { label: "Firefox", data: 90},
+//                    { label: "Chrome", data: 112}
+//                ];
+
+                if ($("#piechart").length) {
+                    $.plot($("#piechart"), data,
+                        {
+                            series: {
+                                pie: {
+                                    show: true
+                                }
+                            },
+                            grid: {
+                                hoverable: true,
+                                clickable: true
+                            },
+                            legend: {
+                                show: false
+                            }
+                        });
+
+                    function pieHover(event, pos, obj) {
+                        if (!obj)
+                            return;
+                        percent = parseFloat(obj.series.percent).toFixed(2);
+                        $("#hover").html('<span style="font-weight: bold; color: ' + obj.series.color + '">' + obj.series.label + ' (' + percent + '%)</span>');
+                    }
+                    aspect2color = {"操控" : "#FF6600", "动力" : "#EEE0E5", "性价比" : "#FFEC8B", "油耗" : "#CD6889"
+                        , "空间" : "#BCEE68", "舒适性" : "#B4EEB4", "外观" : "#9370DB", "内饰" : "#BFEFFF"}
+                    for(var key in aspect2color) {
+                        var re = new RegExp(key)
+                        div2.innerHTML = div2.innerHTML.replace(re, '<font color="{1}">$&</font>'.replace("{1}", aspect2color[key]));
+
+                        div4.innerHTML = div4.innerHTML.replace(re, '<font color="{1}">$&</font>'.replace("{1}", aspect2color[key]));
+                    }
+                    div4.innerHTML = div4.innerHTML.replace(/综合/g, '<font color="#8B0A50">$&</font>');
+                    $("#piechart").bind("plothover", pieHover);
+                    console.log(div2.innerHTML)
+                }
+
+            }
+        </script>
+
+    </div><!--/.fluid-container-->
+
+<!-- external javascript -->
+
+<script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- library for cookie management -->
+<script src="/static/js/jquery.cookie.js"></script>
+<!-- calender plugin -->
+<script src='/static/bower_components/moment/min/moment.min.js'></script>
+<script src='/static/bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+<!-- data table plugin -->
+<script src='/static/js/jquery.dataTables.min.js'></script>
+
+<!-- select or dropdown enhancer -->
+<script src="/static/bower_components/chosen/chosen.jquery.min.js"></script>
+<!-- plugin for gallery image view -->
+<script src="/static/bower_components/colorbox/jquery.colorbox-min.js"></script>
+<!-- notification plugin -->
+<script src="/static/js/jquery.noty.js"></script>
+<!-- library for making tables responsive -->
+<script src="/static/bower_components/responsive-tables/responsive-tables.js"></script>
+<!-- tour plugin -->
+<script src="/static/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+<!-- star rating plugin -->
+<script src="/static/js/jquery.raty.min.js"></script>
+<!-- for iOS style toggle switch -->
+<script src="/static/js/jquery.iphone.toggle.js"></script>
+<!-- autogrowing textarea plugin -->
+<script src="/static/js/jquery.autogrow-textarea.js"></script>
+<!-- multiple file upload plugin -->
+<script src="/static/js/jquery.uploadify-3.1.min.js"></script>
+<!-- history.js for cross-browser state change on ajax -->
+<script src="/static/js/jquery.history.js"></script>
+<!-- application script for Charisma demo -->
+<script src="/static/js/charisma.js"></script>
+<script src="/static/bower_components/flot/excanvas.min.js"></script>
+<script src="/static/bower_components/flot/jquery.flot.js"></script>
+<script src="/static/bower_components/flot/jquery.flot.pie.js"></script>
+<script src="/static/bower_components/flot/jquery.flot.stack.js"></script>
+<script src="/static/bower_components/flot/jquery.flot.resize.js"></script>
+<!--<script src="/static/js/init-chart.js"></script>-->
+
+</body>
+</html>
+
