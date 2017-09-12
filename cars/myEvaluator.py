@@ -39,7 +39,6 @@ def getScoreList(result_list, standard_list):
         for index2, group in enumerate(result_groups):
             if car in group:
                 res.append(group_nums - index2 + 1)
-    print res
     return res
 
 

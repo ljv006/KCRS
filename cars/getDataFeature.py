@@ -20,12 +20,12 @@ total = 0
 out_pos = []
 out_zero = []
 out_neg = []
-log_zero = open("zero_log.txt", "wb")
-log_pos = open("pos_log.txt", "wb")
-log_neg = open("neg_log.txt", "wb")
-log_pVector_pos = open("pVector_log_pos.txt", "wb")
-log_pVector_neg = open("pVector_log_neg.txt", "wb")
-log_pVector_zero = open("pVector_log_zero.txt", "wb")
+# log_zero = open("zero_log.txt", "wb")
+# log_pos = open("pos_log.txt", "wb")
+# log_neg = open("neg_log.txt", "wb")
+# log_pVector_pos = open("pVector_log_pos.txt", "wb")
+# log_pVector_neg = open("pVector_log_neg.txt", "wb")
+# log_pVector_zero = open("pVector_log_zero.txt", "wb")
 for dir in dir_list:
     walk = os.walk(os.path.realpath(dir))
     for root, dirs, files in walk:
@@ -73,12 +73,12 @@ for dir in dir_list:
                     out_neg.append(sentence + '\n')
                 total += 1
                 pVector = pVector1 + pVector2
-                if int(label) == -1:
-                    log_pVector_neg.writelines(','.join([str(num) for num in pVector]) + '\n')
-                if int(label) == 1:
-                    log_pVector_pos.writelines(','.join([str(num) for num in pVector]) + '\n')
-                if int(label) == 0:
-                    log_pVector_zero.writelines(','.join([str(num) for num in pVector]) + '\n')
+                # if int(label) == -1:
+                #     log_pVector_neg.writelines(','.join([str(num) for num in pVector]) + '\n')
+                # if int(label) == 1:
+                #     log_pVector_pos.writelines(','.join([str(num) for num in pVector]) + '\n')
+                # if int(label) == 0:
+                #     log_pVector_zero.writelines(','.join([str(num) for num in pVector]) + '\n')
                 # print pVector1
                 # print pVector2
 
