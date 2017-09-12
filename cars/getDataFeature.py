@@ -73,7 +73,6 @@ for dir in dir_list:
                     out_neg.append(sentence + '\n')
                 total += 1
                 pVector = pVector1 + pVector2
-                print ','.join([str(num) for num in pVector]) + '\n'
                 if int(label) == -1:
                     log_pVector_neg.writelines(','.join([str(num) for num in pVector]) + '\n')
                 if int(label) == 1:
@@ -83,10 +82,4 @@ for dir in dir_list:
                 # print pVector1
                 # print pVector2
 
-print total, cnt_pos, cnt_zero, cnt_neg
-
-# log_zero.writelines(out_zero)
-# log_pos.writelines(out_pos)
-# log_neg.writelines(out_neg)
-
-
+print "total  : %d , positve : %d, zero : %d, negative : %d" % (total, cnt_pos, cnt_zero, cnt_neg)
