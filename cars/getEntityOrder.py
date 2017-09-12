@@ -28,26 +28,13 @@ def judgeSentiment(sent):
         tmp = w.word
         if len(tmp) > 1 and len(flag) > 0 and flag[0] not in filter_list and tmp[0] >= u'/u4e00' and tmp[0] <= u'\u9fa5':
             filteredWords.append(w.word)
-    # pos_cnt = 0
-    # neg_cnt = 0
-    # neu_cnt = 0
     for word in filteredWords:
-        #print word
         if word in posWord:
-            # pos_cnt += 1
             return 1
         if word in neuWord:
-            # neu_cnt += 1
             return 0
         if word in negWord:
-            # neg_cnt += 1
             return -1
-    # if pos_cnt >= neg_cnt and pos_cnt >= neu_cnt:
-    #     return 1
-    # if neu_cnt >= pos_cnt and neu_cnt >= neg_cnt:
-    #     return 0
-    # if neg_cnt >= pos_cnt and neg_cnt >= neu_cnt:
-    #     return -1
 
 for item in d:
     temp = item.replace("\r\n","")
@@ -144,11 +131,8 @@ for dir in dir_list:
                                 flag = 1
                             if res == 0:
                                 flag = 0
-                #print label, flag
                 total += 1
                 if int(label) == flag:
                     cnt += 1
-                #out.append(entity1 + " " + entity2 + " " + str(flag) + '\n')
 print cnt,total
 print cnt / (total + 0.0)
-#log.writelines(out)
