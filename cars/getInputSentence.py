@@ -6,9 +6,9 @@ reload(sys)
 
 sys.setdefaultencoding('utf8')
 #同向
-pos_point3 = ["好", "强", "高"]
+pos_point3 = ["好", "强", "高", "大", "漂亮"]
 pos_point2 = ["正常", "不错", "适中"]
-pos_point1 = ["一般", "还好"]
+pos_point1 = ["一般", "还好", "窄"]
 #反向
 neg_point3 = ["低"]
 neg_point2 = ["一般", "适中"]
@@ -37,7 +37,8 @@ def cut_sentence_new(words):
 
 def calculate(aspect,mark):
     aspect = aspect.encode("utf-8").strip();
-    if aspect == "操控" or aspect == "性价比" or aspect == "动力":
+    if aspect == "操控" or aspect == "性价比" or aspect == "动力" \
+            or aspect == "外观" or aspect == "内饰" or aspect == "空间" or aspect == "舒适性":
         if mark in pos_point3:
             return 3
         elif mark in pos_point2:

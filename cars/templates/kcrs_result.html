@@ -198,6 +198,9 @@
                             "NDCG : {0}".replace("{0}", result_map["NDCG"])
                         continue;
                     }
+                    if (key == "NDCG") {
+                        continue;
+                    }
                     code += "<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>"
                         .replace("{0}", id).replace("{1}", key)
                         .replace("{2}", result_map[key]);
