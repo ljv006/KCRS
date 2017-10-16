@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function decodeUnicode(str) {
+            str = str.replace(/\\/g,"%");
+            return unescape(str);
+        }
+    </script>
+</head>
+<body>
+    <script type = "text/javascript">
+        var aspects = new Array({{num}});
+        aspects[0] = "{{aspect[0]}}";
+        aspects[1] = "{{aspect[1]}}";
+        aspects[2] = "{{aspect[2]}}";
+        aspects[3] = "{{aspect[3]}}";
+        document.write("<div id= 'aspect' style='border:1px solid #000;position: absolute; left: "+ (100 + 100 + ({{num}}-1)*300) /2 + "px;'+ >方面" + "</div>");
+        for(var k = 0; k < {{num}}; ++k) {
+            document.write("<div id= 'aspect" + (k+1).toString() +"' style='border:1px solid #000;position: absolute; left: "+ (100+k*300) + "px; top:100px'+ >" + aspects[k] + "</div>");
+        }
+        function drawPoint(opts){
+            document.write("<span id='"+opts.point[0]+""+opts.point[1]+"' style='display: inline-block; width: "+opts.pw
+
++"px; height: "+opts.ph
+
++"px; background-color: "+opts.color+"; position: absolute; "+"left:"+opts.point[0]+"px; top: "+opts.point[1]+"px;'>"+(opts.point[2]?("<div style='position: relative;'><span style='position: absolute; left: 5px; bottom: 1px; text-align: left; width: 100px;'>"+opts.point[2]+"</span></div>"):"")+"</span>");
+        }
+
+
+        function drawLine(w,pstart, pend, opts){
+            var ph = w;
+            var pw = w;
+            var color = "DarkRed";
+            if(opts){
+                color = opts.color ? opts.color: color;
+            }
+            var slope; //斜率
+            var noSlope = false; //是否有斜率
+            var hdist = pend[0] - pstart[0];
+            var vdist = pend[1] - pstart[1];
+            if(hdist != 0){
+                slope =  Math.abs(vdist/hdist);  //计算斜率
+            }else{
+                noSlope = true; //当hdist=0时，直线没有斜率
+            }
+            var gapp = pw > ph ? ph : pw; //默认相邻点（左上角的像素点）间的距离
+
+            var diagonal = Math.sqrt(Math.pow(hdist,2) + Math.pow(vdist,2)); //斜边长度
+            var pn = parseInt(diagonal/gapp); //计算两点之间的点的数量
+            if(pn < 3){pn=pn*3+1}; //如果点的数量小于3，则加大点数；为什么+1呢，是保证pn=0时至少有一个点
+            var vgap = Math.abs(vdist)/pn; //相邻两点间的垂直距离
+            var hgap = Math.abs(hdist)/pn; //相邻两点间的水平距离
+            for(var i = 0; i< pn ; i++){
+                drawPoint({
+                    pw: pw,
+                    ph: ph,
+                    color: color,
+                    point: [(hgap*i*(pend[0]<pstart[0]?-1:1)*(noSlope?0:1)+pstart[0]),(vgap*i*(pend[1]<pstart[1]?-1:1)+pstart[1])]
+                });
+            }
+        }
+        function drawPolygon(w,ps){
+            if(ps){
+                //画线
+                for(var i = 0; i<ps.length; i++){
+                    for(var j = 0; j < ps.length; j++) {
+                        if(w[i][j] > 1)
+                            drawLine(w[i][j], ps[i],ps[j]);
+                    }
+                }
+                for(var i = 0; i<ps.length; i++){
+                    drawPoint({
+                        pw: 3,
+                        ph: 3,
+                        color: 'RED',
+                        point: ps[i]
+                    });
+                }
+            }
+        }
+        var car = new Array({{num}});
+        car[0] = "{{cars[0]}}";
+        car[1] = "{{cars[1]}}";
+        car[2] = "{{cars[2]}}";
+        car[3] = "{{cars[3]}}";
+        var scores = new Array({{num}});
+        for(var k=0;k<{{num}};k++) {
+            scores[k] = new Array();
+        }
+        scores[0] = {{result[0]}};
+        scores[1] = {{result[1]}};
+        scores[2] = {{result[2]}};
+        scores[3] = {{result[3]}};
+
+
+        var ps = new Array({{num}});
+        for(var k = 0; k < {{num}}; k++) {
+            ps[k] = [
+                [10+k*300, 500-scores[k][0]*1000+100,car[0]],
+                [70+k*300, 500-scores[k][1]*1000+100,car[1]],
+                [130+k*300, 500-scores[k][2]*1000+100,car[2]],
+                [190+k*300, 500-scores[k][3]*1000+100,car[3]]
+            ];
+        }
+        drawPolygon({{weight[0]}},ps[0]);
+        drawPolygon({{weight[1]}},ps[1]);
+        drawPolygon({{weight[2]}},ps[2]);
+        drawPolygon({{weight[3]}},ps[3]);
+        function getElementLeft(element){
+    　　　　var actualLeft = element.offsetLeft;
+    　　　　var current = element.offsetParent;
+    　　　　while (current !== null){
+    　　　　　　actualLeft += current.offsetLeft;
+    　　　　　　current = current.offsetParent;
+    　　　　}
+    　　　　return actualLeft;
+    　　}
+    　　function getElementTop(element){
+    　　　　var actualTop = element.offsetTop;
+    　　　　var current = element.offsetParent;
+    　　　　while (current !== null){
+    　　　　　　actualTop += current.offsetTop;
+    　　　　　　current = current.offsetParent;
+    　　　　}
+    　　　　return actualTop;
+    　　}
+        var x = getElementLeft(document.getElementById("aspect"))+10;
+        var y = getElementTop(document.getElementById("aspect"))+20;
+        var xx;
+        var yy;
+        for(var k = 0; k < {{num}}; ++k) {
+            var i = "aspect" + (k+1).toString();
+            xx = getElementLeft(document.getElementById(i));
+            yy = getElementTop(document.getElementById(i));
+            var ps = [[x, y], [xx, yy]];
+            drawLine(1,ps[0],ps[1]);
+        }
+    </script>
+</body>
+</html>
